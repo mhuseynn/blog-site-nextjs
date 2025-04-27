@@ -1,6 +1,6 @@
 "use client";
 import { createClient } from "@/utils/supabase/client";
-// components/Navbar.jsx
+
 
 import { Moon, Search } from "lucide-react";
 import Link from "next/link";
@@ -37,9 +37,8 @@ const Navbar = () => {
   };
 
   const handleMyBlogsSubmit = (e: React.FormEvent) => {
-    // Handle email click to redirect to author's page
     e.preventDefault();
-    if (user.email) {
+    if (user?.email) {
       router.push(`/author/${encodeURIComponent(user.email)}`);
     }
   };
@@ -73,7 +72,12 @@ const Navbar = () => {
           <a href="/sign-in">Write a Blog</a>
         )}
 
-        <a onClick={handleMyBlogsSubmit} href="">My Blogs</a>
+        {user?(
+          <a onClick={handleMyBlogsSubmit} href="">My Blogs</a>
+        ) : (
+          <a href="/sign-in">My Blogs</a>
+        )}
+        
         <a href="#footer">Contact</a>
       </div>
 
@@ -98,11 +102,6 @@ const Navbar = () => {
         </button>
 
         {user ? (
-          // <Link href="/profile">
-          //   <button>
-          //     <img  width={25} className="mt-[8px]" src="profile4.svg" alt="" />
-          //   </button>
-          // </Link>
           <ProfileDropdown/>
         ) : (
           <Link href="/sign-in">

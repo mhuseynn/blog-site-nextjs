@@ -1,13 +1,15 @@
-import { SessionProvider } from 'next-auth/react';
-import { getSession } from 'next-auth/react';
-import BlogForm from '@/components/BlogForm'; // Assuming BlogForm is your form component
-
-
+import { SessionProvider } from "next-auth/react";
+import { getSession } from "next-auth/react";
+import BlogForm from "@/components/BlogForm";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 function AddBlog({ session }) {
   return (
     <div>
-        <BlogForm />
+      <Navbar />
+      <BlogForm />
+      <Footer />
     </div>
   );
 }

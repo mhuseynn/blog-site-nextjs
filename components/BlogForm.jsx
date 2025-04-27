@@ -51,7 +51,7 @@ const BlogForm = () => {
     if (res.ok) {
       toast.success("Blog post created successfully");
       setTimeout(() => {
-        router.push('/'); // 👈 redirect to home after 1 second
+        router.push('/'); 
       }, 1000);
     } else {
       toast.error("Failed to create blog post");
@@ -111,7 +111,7 @@ const BlogForm = () => {
                 reader.readAsDataURL(file);
                 reader.onload = () => {
                   const base64String = reader.result;
-                  setThumbnail(base64String); // 👈 this will be like "data:image/jpeg;base64,...."
+                  setThumbnail(base64String); 
                 };
               }}
             />

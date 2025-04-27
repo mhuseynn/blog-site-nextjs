@@ -1,30 +1,28 @@
-// app/author/[email]/page.js
-
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation"; // To access the dynamic parameter
+import { useParams } from "next/navigation";
 import MediaList from "@/components/MediaList";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export default function AuthorPage() {
-  const { email } = useParams(); // Get the author's email from the URL
+  const { email } = useParams();
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch blogs for the author when the component mounts
+  
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await fetch(`/api/blogs/author/${email}`); // Adjust to your API route
+        const res = await fetch(`/api/blogs/author/${email}`); 
         const data = await res.json();
         if (data.error) {
           setError(data.error);
         } else {
-          setBlogs(data); // Set the blogs to the state
+          setBlogs(data); 
         }
       } catch (err) {
         console.error("Failed to load blogs:", err);

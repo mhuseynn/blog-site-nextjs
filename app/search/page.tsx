@@ -1,4 +1,4 @@
-// app/search/page.tsx (using App Router)
+
 "use client";
 
 import { useSearchParams } from "next/navigation";
@@ -10,7 +10,7 @@ import MediaList from "@/components/MediaList";
 
 const SearchPage = () => {
   const searchParams = useSearchParams();
-  const searchQuery = searchParams.get("query") || ""; // Extract the 'query' parameter
+  const searchQuery = searchParams.get("query") || ""; 
   const [results, setResults] = useState<any[]>([]);
 
   useEffect(() => {
@@ -22,16 +22,16 @@ const SearchPage = () => {
   const searchBlogs = async (query: string) => {
     const supabase = createClient();
     const { data, error } = await supabase
-      .from("blogs") // Replace with your table name
+      .from("blogs") 
       .select("*, category (name),author (email)" )
-      .ilike("title", `%${query}%`); // Perform a case-insensitive search in the 'title' column
+      .ilike("title", `%${query}%`); 
 
     if (error) {
       console.error("Error fetching search results:", error);
       return;
     }
 
-    setResults(data); // Set the results if there are no errors
+    setResults(data); 
   };
 
   return (
