@@ -6,6 +6,7 @@ import { Moon, Search } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import ProfileDropdown from "./ProfileDropdown";
 
 const Navbar = () => {
   const [user, setUser] = useState<any>(null);
@@ -35,12 +36,20 @@ const Navbar = () => {
     }
   };
 
+  const handleMyBlogsSubmit = (e: React.FormEvent) => {
+    // Handle email click to redirect to author's page
+    e.preventDefault();
+    if (user.email) {
+      router.push(`/author/${encodeURIComponent(user.email)}`);
+    }
+  };
+
   return (
     <nav className="flex items-center justify-between px-6 py-4 shadow-sm bg-white">
       {/* Logo */}
       <div onClick={()=>
         {
-          router.push("./home");
+          router.push("/home");
         }
       } className="flex items-center gap-2 cursor-pointer">
         <div className="w-9 h-9">
@@ -57,14 +66,14 @@ const Navbar = () => {
 
       {/* Links */}
       <div className="flex items-center gap-8 text-gray-700">
-        <a href="#">Home</a>
+        <a href="/home">Home</a>
         {user ? (
           <a href="/blogs/add">Write a Blog</a>
         ) : (
           <a href="/sign-in">Write a Blog</a>
         )}
 
-        <a href="#">My Blogs</a>
+        <a onClick={handleMyBlogsSubmit} href="">My Blogs</a>
         <a href="#footer">Contact</a>
       </div>
 
@@ -89,11 +98,12 @@ const Navbar = () => {
         </button>
 
         {user ? (
-          <Link href="/profile">
-            <button className="bg-black text-white px-4 py-1 rounded-md">
-              Signed In
-            </button>
-          </Link>
+          // <Link href="/profile">
+          //   <button>
+          //     <img  width={25} className="mt-[8px]" src="profile4.svg" alt="" />
+          //   </button>
+          // </Link>
+          <ProfileDropdown/>
         ) : (
           <Link href="/sign-in">
             <button className="bg-black text-white px-4 py-1 rounded-md">

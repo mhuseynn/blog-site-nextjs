@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { createClient } from "@/utils/supabase/client";
+import { useRouter } from "next/navigation";
 
 const supabase = createClient();
 const BlogForm = () => {
@@ -11,6 +12,7 @@ const BlogForm = () => {
   const [category, setCategory] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
   const [body, setBody] = useState("");
+    const router = useRouter();
 
 
   const handleSubmit = async (e) => {
@@ -46,9 +48,14 @@ const BlogForm = () => {
       },
     });
 
-    res.ok
-      ? toast.success("Blog post created successfully") 
-      : toast.error("Failed to create blog post");
+    if (res.ok) {
+      toast.success("Blog post created successfully");
+      setTimeout(() => {
+        router.push('/'); // 👈 redirect to home after 1 second
+      }, 1000);
+    } else {
+      toast.error("Failed to create blog post");
+    }
   };
 
   return (
