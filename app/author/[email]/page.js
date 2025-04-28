@@ -6,13 +6,24 @@ import MediaList from "@/components/MediaList";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { createClient } from "@/utils/supabase/client";
 
 export default function AuthorPage() {
   const { email } = useParams();
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(null);
+  
+  useEffect(() => {
+    const getUser = async () => {
+      const supabase = createClient();
+      const { data } = await supabase.auth.getUser();
+      setUser(data?.user || null);
+    };
 
+    getUser();
+  }, []);
   
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -37,7 +48,7 @@ export default function AuthorPage() {
     }
   }, [email]);
 
-  // Show loading or error message
+  
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -55,7 +66,9 @@ export default function AuthorPage() {
           </div>
           
         </div>
-        <MediaList blogs={blogs} />
+        {user.email != decodeURIComponent(email) ?
+        (<MediaList blogs={blogs} showDelete={false}/>) : (<MediaList blogs={blogs} showDelete={true}/>)
+}
       </main>
 
       <footer>
