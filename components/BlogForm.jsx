@@ -91,9 +91,12 @@ const BlogForm = () => {
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="">Select category</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
+              <option value="1">Technology</option>
+              <option value="2">Travel</option>
+              <option value="3">Business</option>
+              <option value="4">Economy</option>
+              <option value="6">LifeStyle</option>
+              <option value="5">Sports</option>
             </select>
           </div>
 

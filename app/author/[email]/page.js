@@ -62,11 +62,11 @@ export default function AuthorPage() {
         <div className="w-full h-[200px] bg-black flex flex-col items-center ">
           <div className="flex">
           <img src="/logo2.svg" className="w-[100px] border rounded-2xl bg-gray-100 mt-[50px] mr-[20px] "></img>
-          <div className="text-white bg-gray-500 p-[30px] border rounded-lg mt-[50px]">Author: {email}</div>
+          <div className="text-white bg-gray-500 p-[30px] border rounded-lg mt-[50px]">Author: {decodeURIComponent(email)}</div>
           </div>
           
         </div>
-        {user.email != decodeURIComponent(email) ?
+        {((user?.email != decodeURIComponent(email))) ?
         (<MediaList blogs={blogs} showDelete={false}/>) : (<MediaList blogs={blogs} showDelete={true}/>)
 }
       </main>

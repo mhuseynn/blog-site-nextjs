@@ -41,7 +41,9 @@ const HomePage = () => {
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6 text-white">
-                <span className="text-blue-400 text-xs mb-2">{oldestBlog.category.name}</span>
+              <span className="inline-block w-[100px] bg-blue-600 text-white text-xs font-semibold px-[22px] py-1 rounded-full mb-4">
+                  {oldestBlog.category?.name}
+              </span>
                 <h2 className="text-2xl md:text-3xl font-bold">
                   {oldestBlog.title}
                 </h2>
